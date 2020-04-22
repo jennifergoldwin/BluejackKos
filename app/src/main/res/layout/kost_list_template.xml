@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="#ffe6e6">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="8dp"
+        android:id="@+id/relativelayout">
+
+        <ImageView
+            android:id="@+id/img_kos"
+            android:layout_width="150dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="centerCrop"
+            tools:src="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/namakos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@id/img_kos"
+            android:layout_toRightOf="@id/img_kos"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="Nama Kos" />
+
+        <TextView
+            android:id="@+id/fasilitas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/namakos"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/img_kos"
+            android:layout_toRightOf="@id/img_kos"
+            android:ellipsize="end"
+            android:maxLines="5"
+            tools:text="Fasilitas" />
+
+        <TextView
+            android:id="@+id/hargakos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/namakos"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/img_kos"
+            android:layout_toRightOf="@id/img_kos"
+            android:ellipsize="end"
+            android:maxLines="5"
+            tools:text="Harga" />
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
