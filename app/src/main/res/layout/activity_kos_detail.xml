@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Deskripsi Kos"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"/>
@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Harga Kos"
+            android:textSize="16sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
@@ -130,31 +131,35 @@
                     android:textSize="14sp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:text="Location"
-                    android:textSize="14sp" />
-
-                <Button
-                    android:id="@+id/locationbutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/location"
-                    android:background="@color/colorPrimary"
-                    android:fontFamily="@font/revenge"
-                    android:text="View Location Kos "
-                    android:textColor="@android:color/black"
-                    android:textSize="10sp" />
-            </TableRow>
-
         </TableLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="Location"
+                android:textSize="14sp"
+                />
+
+            <Button
+                android:id="@+id/locationbutton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:textStyle="bold"
+                android:text="View Location Kos"
+                android:drawableLeft="@drawable/location"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -185,19 +190,25 @@
                 android:textColor="@android:color/black"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
-        <Button
-            android:id="@+id/btnbookingkos"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Kos"
-            android:textColor="@color/colorAccent"
-            android:textSize="25sp"
-            android:background="@drawable/button_style"
-            android:fontFamily="@font/revenge"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnbookingkos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_style"
+                android:textStyle="bold"
+                android:text="Book Kos"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

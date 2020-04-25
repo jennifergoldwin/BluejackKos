@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardBackgroundColor="#ffe6e6">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="2dp"
+    app:cardBackgroundColor="#ffe6e6">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:padding="8dp"
-        android:id="@+id/relativelayout">
+        android:layout_height="wrap_content"
+        android:id="@+id/relativelayout1"
+        >
 
         <ImageView
             android:id="@+id/img_kos"
-            android:layout_width="150dp"
-            android:layout_height="220dp"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
             android:layout_marginBottom="4dp"
             android:scaleType="centerCrop"
-            tools:src="@color/colorAccent" />
+            android:src="@drawable/logo1" />
 
         <TextView
-            android:id="@+id/namakos"
+            android:id="@+id/booknama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/img_kos"
             android:layout_toRightOf="@id/img_kos"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Nama Kos" />
+            android:text="Nama Kos" />
 
         <TextView
-            android:id="@+id/fasilitas"
+            android:id="@+id/bookdate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/namakos"
             android:layout_marginStart="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_kos"
             android:layout_toRightOf="@id/img_kos"
             android:ellipsize="end"
             android:maxLines="5"
-            tools:text="Fasilitas" />
+            android:text="Booking Date: " />
 
         <TextView
-            android:id="@+id/hargakos"
+            android:id="@+id/bookfasilitas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/namakos"
             android:layout_marginStart="14dp"
+            android:layout_below="@+id/booknama"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="1dp"
             android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_kos"
             android:layout_toRightOf="@id/img_kos"
             android:ellipsize="end"
             android:maxLines="5"
-            tools:text="Harga" />
+            android:text="Fasilitas " />
 
+        <TextView
+            android:id="@+id/bookid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-70dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="16dp"
+            android:layout_toEndOf="@id/bookdate"
+            android:layout_toRightOf="@id/bookdate"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:text="Id " />
 
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

@@ -48,12 +48,12 @@ public class AdapterKosList extends RecyclerView.Adapter<AdapterKosList.ViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterKosList.ViewHolder holder, final int position) {
 
-        Log.d("iniada","jenjen");
+
         final KosData kosData = kosDataList.get(position);
 
         holder.namaKos.setText(kosData.getKosName());
-        holder.hargaKos.setText(kosData.getKosPrice());
-        holder.fasilitasKos.setText(kosData.getKosFacility());
+        holder.hargaKos.setText("Harga : Rp. "+kosData.getKosPrice());
+        holder.fasilitasKos.setText("Fasilitas : "+kosData.getKosFacility());
 
         Picasso.with(context).load(kosData.getPhoto_url()).into(holder.imageView);
 

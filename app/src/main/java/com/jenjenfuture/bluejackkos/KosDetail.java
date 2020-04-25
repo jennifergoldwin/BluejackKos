@@ -1,32 +1,71 @@
 package com.jenjenfuture.bluejackkos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class KosDetail extends AppCompatActivity {
 
-    ImageView imageView;
-    TextView namaKos;
-    TextView fasilitasKos;
-    TextView hargaKos;
-    TextView descKos;
-    TextView latKos;
-    TextView lngKos;
+    private String title = "Detail Kos";
 
-    Button viewLocation;
+    private ImageView imageView;
+    private TextView namaKos;
+    private TextView fasilitasKos;
+    private TextView hargaKos;
+    private TextView descKos;
+    private TextView latKos;
+    private TextView lngKos;
+
+    private Button viewLocation;
+    private Button bookKos;
+
+    private Calendar calendar;
+    private SimpleDateFormat dateFormatter;
+
+    private int year;
+    private int month;
+    private int day;
+    private String userId;
+    private String name;
+    private String facility;
+    private String address;
+    private String price;
+    private String lat;
+    private String lng;
+    private String image;
+
+    private SharedPreferences mySharedPreferences;
+    private DBTransaction dbTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kos_detail);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(title);
+
+        dbTransaction = DBTransaction.getInstance(this);
 
         imageView = findViewById(R.id.imgdetail);
         namaKos = findViewById(R.id.namakosdetail);
@@ -37,16 +76,22 @@ public class KosDetail extends AppCompatActivity {
         lngKos = findViewById(R.id.longtitudekosdetail);
 
         viewLocation = findViewById(R.id.locationbutton);
+        bookKos = findViewById(R.id.btnbookingkos);
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
         final Intent intent = getIntent();
 
-        String image = intent.getStringExtra(AdapterKosList.KEY_IMAGE);
-        final String name = intent.getStringExtra(AdapterKosList.KEY_NAME);
-        String address = intent.getStringExtra(AdapterKosList.KEY_DESC);
-        String facility = intent.getStringExtra(AdapterKosList.KEY_FAC);
-        String price = "Rp. " + intent.getStringExtra(AdapterKosList.KEY_PRICE);
-        final String lat = intent.getStringExtra(AdapterKosList.KEY_LAT);
-        final String lng = intent.getStringExtra(AdapterKosList.KEY_LNG);
+        image = intent.getStringExtra(AdapterKosList.KEY_IMAGE);
+        name = intent.getStringExtra(AdapterKosList.KEY_NAME);
+        address = intent.getStringExtra(AdapterKosList.KEY_DESC);
+        facility = intent.getStringExtra(AdapterKosList.KEY_FAC);
+        price = "Rp. " + intent.getStringExtra(AdapterKosList.KEY_PRICE);
+        lat = intent.getStringExtra(AdapterKosList.KEY_LAT);
+        lng = intent.getStringExtra(AdapterKosList.KEY_LNG);
+
+        mySharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        userId = mySharedPreferences.getString("userId", "");
 
         Picasso.with(this).load(image).into(imageView);
         namaKos.setText(name);
@@ -67,5 +112,75 @@ public class KosDetail extends AppCompatActivity {
             }
         });
 
+        bookKos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(KosDetail.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        boolean canBook = true;
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year,month,dayOfMonth);
+                        String bookDate = dateFormatter.format(newDate.getTime());
+
+                        if (dbTransaction.checkBook(userId,name,bookDate)){
+                            Toast toast = Toast.makeText(getApplicationContext(),"This kost has been booked",Toast.LENGTH_SHORT);
+                            toast.show();
+                            canBook = false;
+                        }
+
+                        if (canBook){
+
+                            String bookId = "";
+                            int sz = mySharedPreferences.getInt("currentidx",0);
+
+                            if (sz<10){
+                                bookId = "BK00" + sz;
+                            }
+                            else if (sz>=10 && sz<=99){
+                                bookId = "BK0" + sz;
+                            }
+                            else{
+                                bookId = "BK" + sz;
+                            }
+                            mySharedPreferences.edit().putInt("currentidx",sz+1).apply();
+
+                            BookingTransaction booking = new BookingTransaction();
+                            booking.setBookingId(bookId);
+                            booking.setUserId(userId);
+                            booking.setKosName(name);
+                            booking.setKosFacility(facility);
+                            booking.setKosPrice(price);
+                            booking.setKosDesc(address);
+                            booking.setKosLatitude(lat);
+                            booking.setKosLongtitude(lng);
+                            booking.setBookingDate(bookDate);
+
+                            dbTransaction.insertBooking(booking);
+
+                            Toast toast = Toast.makeText(getApplicationContext(),"Booked Successfully",Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                },year,month,day);
+
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
     }
 }

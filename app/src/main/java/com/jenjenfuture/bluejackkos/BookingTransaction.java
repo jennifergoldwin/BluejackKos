@@ -1,22 +1,30 @@
 package com.jenjenfuture.bluejackkos;
 
-public class KosData {
-
-    private int id;
+public class BookingTransaction {
+    private String bookingId;
+    private String userId;
     private String kosName;
     private String kosFacility;
     private String kosPrice;
     private String kosDesc;
-    private String kosLongitude;
     private String kosLatitude;
-    private String photo_url;
+    private String kosLongtitude;
+    private String bookingDate;
 
-    public int getId() {
-        return id;
+    public String getBookingId() {
+        return bookingId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBookingId(String bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getKosName() {
@@ -51,14 +59,6 @@ public class KosData {
         this.kosDesc = kosDesc;
     }
 
-    public String getKosLongitude() {
-        return kosLongitude;
-    }
-
-    public void setKosLongitude(String kosLongitude) {
-        this.kosLongitude = kosLongitude;
-    }
-
     public String getKosLatitude() {
         return kosLatitude;
     }
@@ -67,11 +67,19 @@ public class KosData {
         this.kosLatitude = kosLatitude;
     }
 
-    public String getPhoto_url() {
-        return photo_url;
+    public String getKosLongtitude() {
+        return kosLongtitude;
     }
 
-    public void setPhoto_url(String photo_url) {
-        this.photo_url = photo_url;
+    public void setKosLongtitude(String kosLongtitude) {
+        this.kosLongtitude = kosLongtitude;
+    }
+
+    public String getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(String bookingDate) {
+        this.bookingDate = bookingDate;
     }
 }

@@ -16,11 +16,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapForm extends FragmentActivity implements OnMapReadyCallback {
 
-    GoogleMap map;
-    SupportMapFragment supportMapFragment;
-    String name;
-    double lat;
-    double lng;
+    private GoogleMap map;
+    private SupportMapFragment supportMapFragment;
+
+    private String name;
+    private double lat;
+    private double lng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +47,6 @@ public class MapForm extends FragmentActivity implements OnMapReadyCallback {
         map.addMarker(new MarkerOptions().position(latLng).title(name));
         map.setMinZoomPreference(zoomLvl);
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-
 
     }
 

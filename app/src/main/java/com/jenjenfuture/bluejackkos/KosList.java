@@ -2,11 +2,16 @@ package com.jenjenfuture.bluejackkos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -29,16 +34,22 @@ import java.util.List;
 
 public class KosList extends AppCompatActivity {
 
+    private String title = "Kos List";
     private static final String URL_KOST = "https://bit.ly/2zd4uhX";
 
-    RecyclerView recyclerView;
-    AdapterKosList adapterKosList;
-    List<KosData> kosDataList;
+    private RecyclerView recyclerView;
+    private AdapterKosList adapterKosList;
+    private List<KosData> kosDataList;
+    private SharedPreferences preferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kos_list);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(title);
 
         recyclerView = findViewById(R.id.recylerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -47,7 +58,6 @@ public class KosList extends AppCompatActivity {
         kosDataList = new ArrayList<>();
 
         loadUrlData();
-
     }
 
     private void loadUrlData() {
@@ -101,9 +111,55 @@ public class KosList extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        setMode(item.getItemId());
+        setMode(item.getItemId());
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setMode(int itemId) {
+        switch (itemId){
+            case R.id.bookingtrans:
+                showBookingTrans();
+                break;
+            case R.id.logout:
+            case android.R.id.home:
+                showlogout();
+                break;
+        }
+    }
+
+    private void showBookingTrans() {
+        Intent intent = new Intent(KosList.this,HistoryTransaction.class);
+        startActivity(intent);
+    }
+    private void showlogout(){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Are you sure to logout?")
+                .setIcon(getResources().getDrawable(R.drawable.alert))
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        preferences = getSharedPreferences("login",MODE_PRIVATE);
+                        preferences.edit().putBoolean("logged",false).apply();
+                        finish();
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        showlogout();
+        return;
     }
 }
