@@ -15,17 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HistoryTransaction"></activity>
-        <activity android:name=".Register" />
-        <activity android:name=".MapForm" />
+        <activity android:name=".HistoryTransaction"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Register"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MapForm"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCmc4Tpidq0fIdvicU85Of6cxOqSLM2cpU" />
 
-        <activity android:name=".KosDetail" />
-        <activity android:name=".KosList" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".KosDetail"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".KosList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

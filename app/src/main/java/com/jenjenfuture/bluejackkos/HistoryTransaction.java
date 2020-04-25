@@ -45,8 +45,9 @@ public class HistoryTransaction extends AppCompatActivity {
         nobooking = findViewById(R.id.nobook);
 
         recyclerView = findViewById(R.id.recylerview1);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
 
         recyclerView.setAdapter(adapterBookingList);
         adapterBookingList.notifyDataSetChanged();

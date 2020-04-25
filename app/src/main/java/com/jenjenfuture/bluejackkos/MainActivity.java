@@ -38,28 +38,19 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.loginbtn);
         tvSignUp = findViewById(R.id.signuptxt);
 
-        sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
-
         dbUser = DBUser.getInstance(this);
+
+        sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean("logged",false)){
             moveActivity();
         }
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Register.class);
-                startActivity(intent);
-            }
+        tvSignUp.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,Register.class);
+            startActivity(intent);
         });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkUsername();
-                sharedPreferences.edit().putBoolean("logged",true).apply();
-            }
-        });
+        login.setOnClickListener(v -> checkUsername());
 
     }
 
@@ -91,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String userId = DBUser.getUserId();
                 sharedPreferences.edit().putString("userId",userId).apply();
+                sharedPreferences.edit().putBoolean("logged",true).apply();
                 moveActivity();
                 return;
             }

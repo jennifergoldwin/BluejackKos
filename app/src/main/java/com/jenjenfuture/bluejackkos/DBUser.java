@@ -109,8 +109,10 @@ public class DBUser {
                 selectionArgs,null,null,null);
 
         int cursorCount = cursor.getCount();
-        cursor.moveToFirst();
-        userId = cursor.getString(cursor.getColumnIndex(DBHandler.FIELD_USER_ID));
+        if (cursor.moveToFirst()){
+            userId = cursor.getString(cursor.getColumnIndex(DBHandler.FIELD_USER_ID));
+        }
+
         cursor.close();
         db.close();
 
