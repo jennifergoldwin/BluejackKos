@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +77,8 @@ public class Register extends AppCompatActivity {
         tvsignin = findViewById(R.id.signintxt);
 
         dof = findViewById(R.id.dof);
+        dof.setInputType(InputType.TYPE_NULL);
+
         phoneNum = findViewById(R.id.phonenum);
         username = findViewById(R.id.username);
         password = findViewById(R.id.pswrd);

@@ -118,15 +118,16 @@
                     android:id="@+id/dof"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
                     android:ems="10"
+                    android:inputType="none"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:autofillHints="@string/date_of_birth"
                     android:textSize="15sp"
                     android:hint="@string/date_of_birth"
                     android:drawableStart="@drawable/datepicker"
-                    android:background="@drawable/edittext_style"
-                    >
-                    <requestFocus />
+                    android:background="@drawable/edittext_style">
+
                 </EditText>
             </LinearLayout>
 
