@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">Bluejack Kos</string>
+    <string name="no_booking_transaction">No booking transaction</string>
+    <string name="image_kos">Image Kos</string>
+    <string name="nama_kos">Nama Kos</string>
+    <string name="deskripsi_kos">Deskripsi Kos</string>
+    <string name="harga_kos">Harga Kos</string>
+    <string name="details">Details:</string>
+    <string name="fasilitas">Fasilitas</string>
+    <string name="fasilitas_kos">Fasilitas Kos</string>
+    <string name="latitude">Latitude</string>
+    <string name="latitude_kos">Latitude Kos</string>
+    <string name="longtitude">Longtitude</string>
+    <string name="longtitude_kos">Longtitude Kos</string>
+    <string name="location">Location</string>
+    <string name="view_location_kos">View Location Kos</string>
+    <string name="seller">Seller</string>
+    <string name="bluejack_kos">Bluejack Kos</string>
+    <string name="book_kos">Book Kos</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account ? Sign Up</string>
+    <string name="username">Username</string>
+    <string name="bookid">Id</string>
+    <string name="booking_date">Booking Date:</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="agree_with_terms_and_conditions">Agree with Terms and Conditions</string>
+    <string name="already_have_account_sign_in">Already have account? Sign In</string>
+    <string name="register">Register</string>
 </resources>

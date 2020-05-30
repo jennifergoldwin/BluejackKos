@@ -1,9 +1,16 @@
 package com.jenjenfuture.bluejackkos;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +27,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Register extends AppCompatActivity {
+
+    private static final int REQ_SEND_SMS =0 ;
 
     private TextView tvsignin;
 
@@ -48,12 +58,16 @@ public class Register extends AppCompatActivity {
     private int month;
     private int day;
 
+    private String phone;
+
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         dbUser = DBUser.getInstance(this);
 
@@ -75,44 +89,29 @@ public class Register extends AppCompatActivity {
         female = findViewById(R.id.genderfemale);
         male = findViewById(R.id.gendermale);
 
-        dof.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar = Calendar.getInstance();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
+        dof.setOnClickListener(v -> {
+            calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year,month,dayOfMonth);
-                        dof.setText(dateFormatter.format(newDate.getTime()));
-                        dof.setError(null);
-                    }
-                },year,month,day);
-
-                datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
-                datePickerDialog.show();
+            DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this, (view, year, month, dayOfMonth) -> {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year,month,dayOfMonth);
+                dof.setText(dateFormatter.format(newDate.getTime()));
+                dof.setError(null);
+            },year,month,day);
 
 
-            }
+            datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+            datePickerDialog.show();
+
+
         });
-        tvsignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tvsignin.setOnClickListener(v -> finish());
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkValidate();
-
-            }
-        });
+        register.setOnClickListener(v -> checkValidate());
     }
 
     private void checkValidate() {
@@ -205,14 +204,14 @@ public class Register extends AppCompatActivity {
 
             if(validUser){
 
-                String userId = "";
+                String userId;
 
                 int sz = dbUser.getAllUser().size();
 
                 if (sz<10){
                     userId = "US00" + sz;
                 }
-                else if (sz>=10 && sz<=99){
+                else if (sz<=99){
                     userId = "US0" + sz;
                 }
                 else{
@@ -223,14 +222,14 @@ public class Register extends AppCompatActivity {
 
                 String us = username.getText().toString();
                 String passwrd =  password.getText().toString();
-                String phone = phoneNum.getText().toString();
+                phone = phoneNum.getText().toString();
                 String birth = dof.getText().toString();
 
                 int genId = gender.getCheckedRadioButtonId();
                 RadioButton sexgender = findViewById(genId);
                 String sex = sexgender.getText().toString();
 
-                User user = new User();
+                user = new User();
 
                 user.setUserId(userId);
                 user.setUserName(us);
@@ -239,16 +238,48 @@ public class Register extends AppCompatActivity {
                 user.setDof(birth);
                 user.setGender(sex);
 
-                dbUser.insertUser(user);
+                sendSMS();
 
-                Toast toast = Toast.makeText(getApplicationContext(),"Register Successful",Toast.LENGTH_SHORT);
-                toast.show();
-                this.finish();
             }
         }
 
     }
 
+    private void sendSMS() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                == PackageManager.PERMISSION_GRANTED) {
+                message();
+        }
+
+       else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    REQ_SEND_SMS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQ_SEND_SMS) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                message();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "SMS failed, please try again.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void message(){
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phone, null, "You are registered to Bluejack Kos", null, null);
+        Toast.makeText(getApplicationContext(), "SMS sent. Register Successful",
+                Toast.LENGTH_LONG).show();
+        dbUser.insertUser(user);
+        Register.this.finish();
+    }
 
     boolean isEmpty(EditText text){
         String checktext = text.getText().toString();

@@ -10,73 +10,61 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativelayout1"
-        >
+        android:id="@+id/relativelayout1">
 
         <ImageView
+            android:contentDescription="@string/bluejack_kos"
             android:id="@+id/img_kos"
             android:layout_width="76dp"
             android:layout_height="76dp"
-            android:layout_marginBottom="4dp"
             android:scaleType="centerCrop"
+            android:layout_margin="8dp"
             android:src="@drawable/logo1" />
+
+        <TextView
+            android:id="@+id/bookdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@id/img_kos"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:text="@string/booking_date" />
 
         <TextView
             android:id="@+id/booknama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
+            android:layout_below="@id/bookdate"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="1dp"
             android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Nama Kos" />
-
-        <TextView
-            android:id="@+id/bookdate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="16dp"
-            android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:text="Booking Date: " />
+            android:text="@string/nama_kos" />
 
         <TextView
             android:id="@+id/bookfasilitas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="14dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/booknama"
-            android:layout_marginLeft="14dp"
             android:layout_marginTop="1dp"
-            android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="Fasilitas " />
+            android:text="@string/fasilitas" />
 
         <TextView
             android:id="@+id/bookid"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="-70dp"
             android:layout_marginTop="1dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_toEndOf="@id/bookdate"
-            android:layout_toRightOf="@id/bookdate"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="Id " />
+            android:text="@string/bookid" />
 
     </RelativeLayout>
 

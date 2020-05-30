@@ -52,27 +52,26 @@ public class AdapterKosList extends RecyclerView.Adapter<AdapterKosList.ViewHold
         final KosData kosData = kosDataList.get(position);
 
         holder.namaKos.setText(kosData.getKosName());
-        holder.hargaKos.setText("Harga : Rp. "+kosData.getKosPrice());
-        holder.fasilitasKos.setText("Fasilitas : "+kosData.getKosFacility());
+        String hrg = "Harga : Rp. "+kosData.getKosPrice();
+        holder.hargaKos.setText(hrg);
+        String fasilitas = "Fasilitas : "+kosData.getKosFacility();
+        holder.fasilitasKos.setText(fasilitas);
 
-        Picasso.with(context).load(kosData.getPhoto_url()).into(holder.imageView);
+        Picasso.get().load(kosData.getPhoto_url()).into(holder.imageView);
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                KosData kosData1 = kosDataList.get(position);
-                Intent intent = new Intent(v.getContext(),KosDetail.class);
-                intent.putExtra(KEY_ID,kosData1.getId());
-                intent.putExtra(KEY_NAME,kosData1.getKosName());
-                intent.putExtra(KEY_PRICE,kosData1.getKosPrice());
-                intent.putExtra(KEY_FAC,kosData1.getKosFacility());
-                intent.putExtra(KEY_DESC,kosData1.getKosDesc());
-                intent.putExtra(KEY_LAT,kosData1.getKosLatitude());
-                intent.putExtra(KEY_LNG,kosData1.getKosLongitude());
-                intent.putExtra(KEY_IMAGE,kosData1.getPhoto_url());
-                v.getContext().startActivity(intent);
+        holder.relativeLayout.setOnClickListener(v -> {
+            KosData kosData1 = kosDataList.get(position);
+            Intent intent = new Intent(v.getContext(),KosDetail.class);
+            intent.putExtra(KEY_ID,kosData1.getId());
+            intent.putExtra(KEY_NAME,kosData1.getKosName());
+            intent.putExtra(KEY_PRICE,kosData1.getKosPrice());
+            intent.putExtra(KEY_FAC,kosData1.getKosFacility());
+            intent.putExtra(KEY_DESC,kosData1.getKosDesc());
+            intent.putExtra(KEY_LAT,kosData1.getKosLatitude());
+            intent.putExtra(KEY_LNG,kosData1.getKosLongitude());
+            intent.putExtra(KEY_IMAGE,kosData1.getPhoto_url());
+            v.getContext().startActivity(intent);
 
-            }
         });
 
     }

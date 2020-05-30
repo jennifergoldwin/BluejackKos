@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class KosDetail extends AppCompatActivity {
 
@@ -61,7 +62,7 @@ public class KosDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kos_detail);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(title);
 
@@ -93,7 +94,7 @@ public class KosDetail extends AppCompatActivity {
         mySharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         userId = mySharedPreferences.getString("userId", "");
 
-        Picasso.with(this).load(image).into(imageView);
+        Picasso.get().load(image).into(imageView);
         namaKos.setText(name);
         fasilitasKos.setText(facility);
         hargaKos.setText(price);
@@ -101,78 +102,69 @@ public class KosDetail extends AppCompatActivity {
         latKos.setText(lat);
         lngKos.setText(lng);
 
-        viewLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(KosDetail.this,MapForm.class);
-                intent1.putExtra(AdapterKosList.KEY_LAT,lat);
-                intent1.putExtra(AdapterKosList.KEY_LNG,lng);
-                intent1.putExtra(AdapterKosList.KEY_NAME,name);
-                startActivity(intent1);
-            }
+        viewLocation.setOnClickListener(v -> {
+            Intent intent1 = new Intent(KosDetail.this,MapForm.class);
+            intent1.putExtra(AdapterKosList.KEY_LAT,lat);
+            intent1.putExtra(AdapterKosList.KEY_LNG,lng);
+            intent1.putExtra(AdapterKosList.KEY_NAME,name);
+            startActivity(intent1);
         });
 
-        bookKos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar = Calendar.getInstance();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
+        bookKos.setOnClickListener(v -> {
+            calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(KosDetail.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(KosDetail.this, (view, year, month, dayOfMonth) -> {
 
-                        boolean canBook = true;
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year,month,dayOfMonth);
-                        String bookDate = dateFormatter.format(newDate.getTime());
+                boolean canBook = true;
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year,month,dayOfMonth);
+                String bookDate = dateFormatter.format(newDate.getTime());
 
-                        if (dbTransaction.checkBook(userId,name,bookDate)){
-                            Toast toast = Toast.makeText(getApplicationContext(),"This kost has been booked",Toast.LENGTH_SHORT);
-                            toast.show();
-                            canBook = false;
-                        }
+                if (dbTransaction.checkBook(userId,name,bookDate)){
+                    Toast toast = Toast.makeText(getApplicationContext(),"This kost has been booked",Toast.LENGTH_SHORT);
+                    toast.show();
+                    canBook = false;
+                }
 
-                        if (canBook){
+                if (canBook){
 
-                            String bookId = "";
-                            int sz = mySharedPreferences.getInt("currentidx",0);
+                    String bookId;
+                    int sz = mySharedPreferences.getInt("currentidx",0);
 
-                            if (sz<10){
-                                bookId = "BK00" + sz;
-                            }
-                            else if (sz>=10 && sz<=99){
-                                bookId = "BK0" + sz;
-                            }
-                            else{
-                                bookId = "BK" + sz;
-                            }
-                            mySharedPreferences.edit().putInt("currentidx",sz+1).apply();
-
-                            BookingTransaction booking = new BookingTransaction();
-                            booking.setBookingId(bookId);
-                            booking.setUserId(userId);
-                            booking.setKosName(name);
-                            booking.setKosFacility(facility);
-                            booking.setKosPrice(price);
-                            booking.setKosDesc(address);
-                            booking.setKosLatitude(lat);
-                            booking.setKosLongtitude(lng);
-                            booking.setBookingDate(bookDate);
-
-                            dbTransaction.insertBooking(booking);
-
-                            Toast toast = Toast.makeText(getApplicationContext(),"Booked Successfully",Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
+                    if (sz<10){
+                        bookId = "BK00" + sz;
                     }
-                },year,month,day);
+                    else if (sz<=99){
+                        bookId = "BK0" + sz;
+                    }
+                    else{
+                        bookId = "BK" + sz;
+                    }
+                    mySharedPreferences.edit().putInt("currentidx",sz+1).apply();
 
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-                datePickerDialog.show();
-            }
+                    BookingTransaction booking = new BookingTransaction();
+                    booking.setBookingId(bookId);
+                    booking.setUserId(userId);
+                    booking.setKosName(name);
+                    booking.setKosFacility(facility);
+                    booking.setKosPrice(price);
+                    booking.setKosDesc(address);
+                    booking.setKosLatitude(lat);
+                    booking.setKosLongtitude(lng);
+                    booking.setBookingDate(bookDate);
+
+                    dbTransaction.insertBooking(booking);
+
+                    Toast toast = Toast.makeText(getApplicationContext(),"Booked Successfully",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            },year,month,day);
+
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+            datePickerDialog.show();
         });
 
     }

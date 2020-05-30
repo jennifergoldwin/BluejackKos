@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,30 +48,19 @@ public class AdapterBookingList extends RecyclerView.Adapter<AdapterBookingList.
         holder.fasilitas.setText(bookingTransaction.getKosFacility());
         holder.namaKos.setText(bookingTransaction.getKosName());
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(v.getRootView().getContext());
+        holder.relativeLayout.setOnClickListener(v -> {
+            final AlertDialog.Builder alert = new AlertDialog.Builder(v.getRootView().getContext());
 
-                alert.setTitle("Want to cancel this transaction?")
-                        .setIcon(R.drawable.alert)
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                bookId = bookingTransaction.getBookingId();
-                                dbTransaction.deleteBooking(bookId);
-                                historyTransaction.refresh();
-                            }
-                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+            alert.setTitle("Want to cancel this transaction?")
+                    .setIcon(R.drawable.alert)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        bookId = bookingTransaction.getBookingId();
+                        dbTransaction.deleteBooking(bookId);
+                        historyTransaction.refresh();
+                    }).setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
-                alert.show();
-            }
+            alert.show();
         });
 
     }

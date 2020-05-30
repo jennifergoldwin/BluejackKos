@@ -10,17 +10,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
+            android:contentDescription="@string/image_kos"
             android:id="@+id/imgdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/logo1"/>
         <TextView
             android:id="@+id/namakosdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="32sp"
-            android:text="Nama Kos"
+            android:text="@string/nama_kos"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -30,7 +32,7 @@
             android:id="@+id/desckosdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deskripsi Kos"
+            android:text="@string/deskripsi_kos"
             android:textSize="14sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -39,7 +41,7 @@
             android:id="@+id/hrgkosdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Harga Kos"
+            android:text="@string/harga_kos"
             android:textSize="16sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -50,7 +52,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Details:"
+            android:text="@string/details"
             android:textSize="12sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -72,8 +74,8 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:text="Fasilitas"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/fasilitas"
                     android:textSize="14sp" />
 
                 <TextView
@@ -81,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fasilitas Kos "
+                    android:text="@string/fasilitas_kos"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </TableRow>
@@ -95,8 +97,8 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:text="Latitude"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/latitude"
                     android:textSize="14sp" />
 
                 <TextView
@@ -104,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Latitude Kos"
+                    android:text="@string/latitude_kos"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </TableRow>
@@ -117,8 +119,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:text="Longtitude"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/longtitude"
                     android:textSize="14sp" />
 
                 <TextView
@@ -126,7 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Longtitude Kos"
+                    android:text="@string/longtitude_kos"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </TableRow>
@@ -142,8 +144,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:text="Location"
+                android:layout_marginEnd="16dp"
+                android:text="@string/location"
                 android:textSize="14sp"
                 />
 
@@ -153,18 +155,18 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_style"
                 android:textStyle="bold"
-                android:text="View Location Kos"
-                android:drawableLeft="@drawable/location"
-                android:layout_marginLeft="10dp"
+                android:text="@string/view_location_kos"
+                android:drawableStart="@drawable/location"
+                android:layout_marginStart="10dp"
                 android:textColor="@android:color/black"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Seller"
+            android:text="@string/seller"
             android:textSize="12sp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -181,12 +183,12 @@
                 android:src="@drawable/logo1"
                 android:layout_centerVertical="true"
                 android:id="@+id/profile_image"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginEnd="16dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/profile_image"
-                android:text="Bluejack Kos"
+                android:layout_toEndOf="@id/profile_image"
+                android:text="@string/bluejack_kos"
                 android:textColor="@android:color/black"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -204,7 +206,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_style"
                 android:textStyle="bold"
-                android:text="Book Kos"
+                android:text="@string/book_kos"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
                 android:textSize="25sp" />

@@ -20,6 +20,7 @@
         android:id="@+id/relativelayout">
 
         <ImageView
+            android:contentDescription="@string/image_kos"
             android:id="@+id/img_kos"
             android:layout_width="150dp"
             android:layout_height="220dp"
@@ -32,12 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="Nama Kos" />
@@ -45,14 +44,12 @@
         <TextView
             android:id="@+id/fasilitas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/namakos"
             android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
             android:ellipsize="end"
             android:maxLines="5"
             tools:text="Fasilitas" />
@@ -60,14 +57,12 @@
         <TextView
             android:id="@+id/hargakos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/namakos"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fasilitas"
             android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_toEndOf="@id/img_kos"
-            android:layout_toRightOf="@id/img_kos"
             android:ellipsize="end"
             android:maxLines="5"
             tools:text="Harga" />

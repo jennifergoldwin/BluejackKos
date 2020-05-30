@@ -7,24 +7,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="500dp">
-        <ImageView
-            android:layout_marginTop="0dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/logo1"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginTop="80dp"
         android:paddingLeft="60dp"
-        android:paddingRight="60dp">
+        android:paddingRight="60dp"
+        android:orientation="vertical"
+        android:paddingTop="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:contentDescription="@string/bluejack_kos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo1" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,22 +32,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="1dp"
-                android:layout_marginTop="70dp">
-
+                android:padding="1dp">
                 <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
-                    android:drawableLeft="@drawable/user"
-                    android:layout_marginLeft="15dp"
+                    android:hint="@string/username"
+                    android:autofillHints="@string/username"
+                    android:drawableStart="@drawable/user"
                     android:background="@drawable/edittext_style"
                     android:letterSpacing="0.1"
                     android:textSize="15sp"
                     android:inputType="text"
-                    android:textColor="#fff"
-                    />
+                    android:textColor="#fff" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,15 +57,16 @@
                     android:id="@+id/pswrd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:drawableLeft="@drawable/pass1"
-                    android:layout_marginLeft="15dp"
+                    android:hint="@string/password"
+                    android:autofillHints="@string/password"
+                    android:drawableStart="@drawable/pass1"
                     android:background="@drawable/edittext_style"
                     android:inputType="textPassword"
                     android:letterSpacing="0.1"
                     android:textSize="15sp"
                     android:textColor="#fff"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,31 +78,30 @@
                     android:id="@+id/confrimpass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
-                    android:layout_marginLeft="15dp"
-                    android:drawableLeft="@drawable/pass1"
+                    android:hint="@string/confirm_password"
+                    android:autofillHints="@string/confirm_password"
+                    android:drawableStart="@drawable/pass1"
                     android:background="@drawable/edittext_style"
                     android:inputType="textPassword"
                     android:letterSpacing="0.1"
                     android:textSize="15sp"
                     android:textColor="#fff"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="1dp"
                 android:layout_marginTop="10dp">
-
                 <EditText
                     android:id="@+id/phonenum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone Number"
-
-                    android:layout_marginLeft="15dp"
+                    android:hint="@string/phone_number"
+                    android:autofillHints="@string/phone_number"
                     android:background="@drawable/edittext_style"
-                    android:drawableLeft="@drawable/phonenumber"
+                    android:drawableStart="@drawable/phonenumber"
                     android:inputType="phone"
                     android:letterSpacing="0.1"
                     android:textSize="15sp"
@@ -122,17 +118,18 @@
                     android:id="@+id/dof"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:inputType="none"
                     android:ems="10"
-                    android:inputType="date"
+                    android:autofillHints="@string/date_of_birth"
                     android:textSize="15sp"
-                    android:hint="Date of Birth"
-                    android:drawableLeft="@drawable/datepicker"
-                    android:background="@drawable/edittext_style">
+                    android:hint="@string/date_of_birth"
+                    android:drawableStart="@drawable/datepicker"
+                    android:background="@drawable/edittext_style"
+                    >
                     <requestFocus />
                 </EditText>
-
             </LinearLayout>
+
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,18 +143,19 @@
                     android:id="@+id/gendermale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male">
+                    android:text="@string/male">
 
                 </RadioButton>
                 <RadioButton
                     android:id="@+id/genderfemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:layout_marginLeft="15dp">
+                    android:text="@string/female"
+                    android:layout_marginStart="15dp">
 
                 </RadioButton>
             </RadioGroup>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,8 +167,7 @@
                 <CheckBox
                     android:id="@+id/checkterm"
                     android:layout_width="30dp"
-                    android:layout_height="25dp"
-                    ></CheckBox>
+                    android:layout_height="25dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -178,9 +175,9 @@
                     android:background="#00000000"
                     android:letterSpacing="0.1"
                     android:textStyle="bold"
-                    android:text="Agree with Terms and Conditions"
+                    android:text="@string/agree_with_terms_and_conditions"
                     android:textColor="@color/colorAccent"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -196,8 +193,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/button_style"
-                    android:fontFamily="@font/revenge"
-                    android:text="REGISTER"
+                    android:text="@string/register"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp"
                     android:textStyle="bold">
@@ -210,7 +206,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="Already have account? Sign In"
+                    android:textAlignment="center"
+                    android:text="@string/already_have_account_sign_in"
                     android:textColor="@color/colorAccent"
                     android:letterSpacing="0.1"
                     android:linksClickable="true"/>
@@ -218,6 +215,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
