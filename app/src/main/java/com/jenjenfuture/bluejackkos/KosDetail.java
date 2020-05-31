@@ -8,17 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -49,7 +47,7 @@ public class KosDetail extends AppCompatActivity {
     private String name;
     private String facility;
     private String address;
-    private String price;
+    private int price;
     private String lat;
     private String lng;
     private String image;
@@ -83,11 +81,14 @@ public class KosDetail extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+
         image = intent.getStringExtra(AdapterKosList.KEY_IMAGE);
         name = intent.getStringExtra(AdapterKosList.KEY_NAME);
         address = intent.getStringExtra(AdapterKosList.KEY_DESC);
         facility = intent.getStringExtra(AdapterKosList.KEY_FAC);
-        price = "Rp. " + intent.getStringExtra(AdapterKosList.KEY_PRICE);
+        price = Integer.parseInt(intent.getStringExtra(AdapterKosList.KEY_PRICE));
         lat = intent.getStringExtra(AdapterKosList.KEY_LAT);
         lng = intent.getStringExtra(AdapterKosList.KEY_LNG);
 
@@ -97,7 +98,7 @@ public class KosDetail extends AppCompatActivity {
         Picasso.get().load(image).into(imageView);
         namaKos.setText(name);
         fasilitasKos.setText(facility);
-        hargaKos.setText(price);
+        hargaKos.setText(formatRupiah.format((double)price));
         descKos.setText(address);
         latKos.setText(lat);
         lngKos.setText(lng);
@@ -150,7 +151,7 @@ public class KosDetail extends AppCompatActivity {
                     booking.setUserId(userId);
                     booking.setKosName(name);
                     booking.setKosFacility(facility);
-                    booking.setKosPrice(price);
+                    booking.setKosPrice(String.valueOf(price));
                     booking.setKosDesc(address);
                     booking.setKosLatitude(lat);
                     booking.setKosLongtitude(lng);

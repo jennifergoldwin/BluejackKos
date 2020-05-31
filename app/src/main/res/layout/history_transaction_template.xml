@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginBottom="2dp"
-    app:cardBackgroundColor="#ffe6e6">
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    app:cardBackgroundColor="#b3d9ff">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +21,7 @@
             android:layout_height="76dp"
             android:scaleType="centerCrop"
             android:layout_margin="8dp"
-            android:src="@drawable/logo1" />
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/bookdate"

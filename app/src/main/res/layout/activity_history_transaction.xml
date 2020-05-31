@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoryTransaction"
-    android:background="@drawable/background"
+    android:background="@drawable/background5"
     android:layout_gravity="center">
 
     <androidx.recyclerview.widget.RecyclerView

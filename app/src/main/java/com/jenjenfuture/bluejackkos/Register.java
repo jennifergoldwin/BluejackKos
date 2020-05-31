@@ -1,23 +1,14 @@
 package com.jenjenfuture.bluejackkos;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,9 +17,13 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class Register extends AppCompatActivity {
 
@@ -126,7 +121,6 @@ public class Register extends AppCompatActivity {
             isValid = false;
         }
 
-
         if (gender.getCheckedRadioButtonId()==-1){
             female.setError("Select gender");
             isValid = false;
@@ -220,8 +214,6 @@ public class Register extends AppCompatActivity {
                 else{
                     userId = "US" + sz;
                 }
-
-                Log.d("123123",userId);
 
                 String us = username.getText().toString();
                 String passwrd =  password.getText().toString();

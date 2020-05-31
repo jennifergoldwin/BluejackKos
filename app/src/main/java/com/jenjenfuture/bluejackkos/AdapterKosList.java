@@ -2,18 +2,18 @@ package com.jenjenfuture.bluejackkos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +31,9 @@ public class AdapterKosList extends RecyclerView.Adapter<AdapterKosList.ViewHold
     public static final String KEY_DESC = "address";
     public static final String KEY_LAT = "lat";
     public static final String KEY_LNG = "lng";
+
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
     public  AdapterKosList (List<KosData> kosDataList, Context context){
         this.kosDataList = kosDataList;
@@ -52,8 +55,9 @@ public class AdapterKosList extends RecyclerView.Adapter<AdapterKosList.ViewHold
         final KosData kosData = kosDataList.get(position);
 
         holder.namaKos.setText(kosData.getKosName());
-        String hrg = "Harga : Rp. "+kosData.getKosPrice();
-        holder.hargaKos.setText(hrg);
+        int hrg = Integer.parseInt(kosData.getKosPrice());
+
+        holder.hargaKos.setText(formatRupiah.format((double)hrg));
         String fasilitas = "Fasilitas : "+kosData.getKosFacility();
         holder.fasilitasKos.setText(fasilitas);
 
@@ -61,7 +65,7 @@ public class AdapterKosList extends RecyclerView.Adapter<AdapterKosList.ViewHold
 
         holder.relativeLayout.setOnClickListener(v -> {
             KosData kosData1 = kosDataList.get(position);
-            Intent intent = new Intent(v.getContext(),KosDetail.class);
+            Intent intent = new Intent(v.getContext(), KosDetail.class);
             intent.putExtra(KEY_ID,kosData1.getId());
             intent.putExtra(KEY_NAME,kosData1.getKosName());
             intent.putExtra(KEY_PRICE,kosData1.getKosPrice());

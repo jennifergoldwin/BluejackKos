@@ -1,6 +1,6 @@
 package com.jenjenfuture.bluejackkos;
 
-public class KosData {
+public  class KosData {
 
     private int id;
     private String kosName;
